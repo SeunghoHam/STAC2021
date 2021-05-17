@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    [Header("회전각 - 건들지마셈")]
+    [Header("do not touch")]
     public float baseAngle = 0.0f;
 
     [SerializeField] public GameObject Bullet;
@@ -44,7 +44,7 @@ public class Rotate : MonoBehaviour
     }
     void Shoot()
     {
-        Debug.Log("촣알발싸");
+        Debug.Log("Shoot Bullet");
         GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
     }
@@ -56,7 +56,8 @@ public class Rotate : MonoBehaviour
         {
             //gameObject.transform.localEulerAngles = new Vector3(0, 0, -45);
         }
-        // 드래그 해제 할 때 카메라 쉐이킹
+
+        // 
         if(Input.GetMouseButtonUp(0))
         {
             camAnim.SetTrigger("shake");
