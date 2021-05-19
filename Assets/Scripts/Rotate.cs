@@ -1,29 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Rotate : MonoBehaviour
 {
-    [Header("do not touch")]
-    public float baseAngle = 0.0f;
-
     [Header("Check")]
-    [SerializeField] private bool bulletShooting = false;
+    [SerializeField] private bool mouseDrag = false;
     [SerializeField] private bool mouseClick = false;
 
-    [SerializeField] public Transform angle3; // Triangle Object position
-    [SerializeField] public GameObject Bullet; // Bullet GameObject
+    [SerializeField] private float baseAngle = 0.0f;
+
+
+    [Header("Reference")]
+    [SerializeField] private Transform angle3; // Triangle Object position
+
     [SerializeField] private Transform ShootPoint; // ShootPoint = RotatingObject
-    
-    [SerializeField] Animator camAnim;
-
-
+    [SerializeField] Animator camAnim; // CameraAnimator
     [SerializeField] GameObject testImage;
+
+    [Header("bulletPrefab")]
+    [SerializeField] private GameObject Bullet; // Bullet GameObject
+
+
+ 
     public float bulletSpeed = 3.0f;
     private void OnMouseDown()
     {
         mouseClick = true;
-        bulletShooting = true;
+        mouseDrag = false;
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         pos = Input.mousePosition - pos;
         baseAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
@@ -32,18 +37,21 @@ public class Rotate : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        Debug.Log("mouse Click = false");
         mouseClick = false;
-        bulletShooting = false;
+        mouseDrag = true;
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         pos = Input.mousePosition - pos;
         float angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg - baseAngle;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void Shoot()
+    public void Shoot()
     {
-        
-        GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
+        //StartCoroutine(CreateBullet());
+
+        BulletPoolingManager.GetObject();
+        //GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         //Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
 
     }
@@ -74,7 +82,7 @@ public class Rotate : MonoBehaviour
 
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             camAnim.SetTrigger("shake");
         }
@@ -84,5 +92,16 @@ public class Rotate : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator CreateBullet()
+    {
+        while (true)
+        {
+            yield return null;
+            Instantiate(Bullet, Vector2.zero, Quaternion.identity);
+            //GameObject t_object = BulletPoolingManager.instance.GetQueue();
+            //t_object.transform.position = Vector2.zero;
+        }
     }
 }
