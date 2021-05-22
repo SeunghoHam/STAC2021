@@ -4,49 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 direction;
-    public void Shoot(Vector2 direction)
+    void Awake() 
     {
-        this.direction= direction;
-        //Invoke("DestroyBullet", 1f);
-        StartCoroutine(DestroyBullet());
+        //http://devkorea.co.kr/bbs/board.php?bo_table=m03_qna&wr_id=76571
     }
-    IEnumerator DestroyBullet()
+    void OnEnable() 
     {
-        yield return new WaitForSeconds(1f);
-        BulletPoolingManager.ReturnObject(this);
+        Rotate rotate = GetComponent<Rotate>();
+        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        //rigid.AddRelativeForce(0,);
     }
-
-    void Update() 
+    void Start() 
     {
-        transform.Translate(direction);    
-    }
-    /*
-    Rigidbody2D m_myRigid = null;
-    [SerializeField] private float bulletSpeed = 3f;
-    private void OnEnable() 
-    {
-        if(m_myRigid == null)
-        {
-            m_myRigid =GetComponent<Rigidbody2D>();
-        }    
-        m_myRigid.velocity= Vector3.zero;
-        //Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
-        m_myRigid.AddForce(gameObject.transform.forward * bulletSpeed); 
         
     }
-    void Start()
-    {
-        StartCoroutine(destroyBullet());
-    }
-    void Update() {
-        
-    }
-    // Update is called once per frame
-    IEnumerator destroyBullet()
-    {
-        yield return new WaitForSeconds(1f);
-        //BulletPoolingManager.instance.InsertQueue(gameObject);
-    }
-}*/
 }
