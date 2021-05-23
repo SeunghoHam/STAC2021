@@ -9,9 +9,8 @@ public class Rotate : MonoBehaviour
     [SerializeField] private bool mouseDrag; // if Mouse Drag
     [SerializeField] private bool isButtonDown; // if Mouse Click
     [SerializeField] private bool isShootButtonDown;
-
     [SerializeField] private float baseAngle = 0.0f;
-
+    [SerializeField] public int Direction = 0;
 
     [Header("Reference")]
     [SerializeField] private Transform angle3; // Triangle Object position
@@ -20,14 +19,17 @@ public class Rotate : MonoBehaviour
     [SerializeField] Animator camAnim; // CameraAnimator
     [SerializeField] GameObject testImage;
 
+    [SerializeField] private float maxShootDelay = 3.0f;
+    [SerializeField] private float curShootDelay = 0.2f;
+
     [Header("Prefab")]
-    [SerializeField] private GameObject Bullet; // Bullet GameObject
+    [SerializeField] private GameObject prefabBullet; // Bullet GameObject
     [SerializeField] private GameObject A3;
 
 
 
     
-    public float bulletSpeed = 3.0f;
+    public float bulletSpeed = 5.0f;
     private void OnMouseDown()
     {
         isButtonDown = true;        
@@ -54,22 +56,31 @@ public class Rotate : MonoBehaviour
         //BulletPoolingManager.GetObject();
         //GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         //Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
+        
 
         Debug.Log("Shoot");
-        Vector3 northEast = Vector2.up + Vector2.left;
-        Quaternion rotation = Quaternion.LookRotation(northEast);
-        Bullet.transform.rotation = rotation;
+        GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance 
+        // Create position and Rotation is Local 
+        Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
+        Vector2 leftup = Vector2.up + Vector2.left;
+        
+        //rigid.AddForce(new Vector2(-1,1) * bulletSpeed, ForceMode2D.Impulse);
+        rigid.AddRelativeForce(new Vector2(-1,1) * bulletSpeed , ForceMode2D.Impulse);
+        
+
+        //curShootDelay = 0;
     }
+    private void Reload()
+    {
+            curShootDelay += Time.deltaTime;
+    }
+    
     public void TestShoot()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
-            
-            Bullet.transform.position = transform.position;
-
-            Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
-            rigid.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Impulse);
+            //if(curShootDelay >  maxShootDelay)
+                Shoot();
         }
         
     }
@@ -85,10 +96,10 @@ public class Rotate : MonoBehaviour
             
             if (this.transform.eulerAngles.z < 50f && this.transform.eulerAngles.z < 291f)
                 {
-                    //Debug.Log("좌측상단");
-                    //A3.transform.localEulerAngles = new Vector3(0, 0, -45);
+                    // left top Angle Setting
                     this.transform.eulerAngles = new Vector3(0,0,0);
                     testImage.SetActive(true);
+                    
                 }
             else if(this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
             {
@@ -97,6 +108,15 @@ public class Rotate : MonoBehaviour
         }
     }
 
+    private void Shake()
+    {
+ if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown&& !isShootButtonDown)
+        {
+            isButtonDown = false;
+            mouseDrag = false;
+            camAnim.SetTrigger("shake");
+        }
+    }
     private void Start()
     {
         testImage.SetActive(false);
@@ -109,12 +129,7 @@ public class Rotate : MonoBehaviour
         //Debug.Log(transform.eulerAngles.z);
         SetRotateZ();
         TestShoot();
-        if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown&& !isShootButtonDown)
-        {
-            isButtonDown = false;
-            mouseDrag = false;
-            camAnim.SetTrigger("shake");
-        }
+        Shake();
     }
 
     IEnumerator CreateBullet()
@@ -122,7 +137,7 @@ public class Rotate : MonoBehaviour
         while (true)
         {
             yield return null;
-            Instantiate(Bullet, Vector2.zero, Quaternion.identity);
+            //Instantiate(Bullet, Vector2.zero, Quaternion.identity);
             //GameObject t_object = BulletPoolingManager.instance.GetQueue();
             //t_object.transform.position = Vector2.zero;
         }
