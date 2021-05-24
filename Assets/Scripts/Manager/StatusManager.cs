@@ -54,13 +54,13 @@ public class StatusManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.G))
         {
-            IncreaseHP();
+            IncreaseHP(1);
         }   
         if(Input.GetKeyDown(KeyCode.D))
         {
-            DecreaseHP();
+            DecreaseHP(1);
         }
     }
 }

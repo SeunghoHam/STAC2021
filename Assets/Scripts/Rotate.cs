@@ -18,8 +18,8 @@ public class Rotate : MonoBehaviour
     [SerializeField] Animator camAnim; // CameraAnimator
     [SerializeField] GameObject testImage;
 
-    [SerializeField] private float maxShootDelay = 3.0f;
-    [SerializeField] private float curShootDelay = 0.2f;
+    [SerializeField] private float maxShootDelay = 0.2f;
+    [SerializeField] private float curShootDelay= 1f;
 
     [Header("Shoot Bullet Rotation")]
     [SerializeField] private float AnlgeX;
@@ -32,11 +32,11 @@ public class Rotate : MonoBehaviour
 
 
 
-    
+
     public float bulletSpeed = 5.0f;
     private void OnMouseDown()
     {
-        isButtonDown = true;        
+        isButtonDown = true;
 
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         pos = Input.mousePosition - pos;
@@ -60,61 +60,66 @@ public class Rotate : MonoBehaviour
         //BulletPoolingManager.GetObject();
         //GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         //Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
-        
 
-        Debug.Log("Shoot");
-        GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
-        // Create position and Rotation is Local 
-        Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
-        Vector2 leftup = Vector2.up + Vector2.left;
-        
-        //rigid.AddForce(new Vector2(-1,1) * bulletSpeed, ForceMode2D.Impulse);
-        rigid.AddRelativeForce(new Vector2(-1,0.8f) * bulletSpeed , ForceMode2D.Impulse);
-        
+        if(curShootDelay < maxShootDelay)
+            return;
+        if (curShootDelay > maxShootDelay)
+        {
+            Debug.Log("Shoot");
+            GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
+            // Create position and Rotation is Local 
+            Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
+            Vector2 leftup = Vector2.up + Vector2.left;
 
-        //curShootDelay = 0;
+            //rigid.AddForce(new Vector2(-1,1) * bulletSpeed, ForceMode2D.Impulse);
+            rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
+        }
+
+
+
+        curShootDelay = 0;
     }
     private void Reload()
     {
-            curShootDelay += Time.deltaTime;
+        curShootDelay += Time.deltaTime;
     }
-    
+
     public void TestShoot()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //if(curShootDelay >  maxShootDelay)
-                Shoot();
+            Shoot();
         }
-        
+
     }
     void SetRotateZ() // 이런식으로 하면 될듯
     {
         if (isButtonDown && mouseDrag) // if Clicking
         {
-           //Debug.Log("돌리는 중 입니다");
+            //Debug.Log("돌리는 중 입니다");
         }
 
         if (!isButtonDown && !mouseDrag) // if not Clicking
         {
-            
+
             if (this.transform.eulerAngles.z < 50f && this.transform.eulerAngles.z < 291f)
-                {
-                    // left top Angle Setting
-                    this.transform.eulerAngles = new Vector3(0,0,0);
-                    testImage.SetActive(true);
-                    
-                }
-            else if(this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
             {
-                this.transform.eulerAngles = new Vector3(0,0,120);
+                // left top Angle Setting
+                this.transform.eulerAngles = new Vector3(0, 0, 0);
+                testImage.SetActive(true);
+
+            }
+            else if (this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 120);
             }
         }
     }
 
     private void Shake()
     {
- if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown&& !isShootButtonDown)
+        if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown && !isShootButtonDown)
         {
             isButtonDown = false;
             mouseDrag = false;
@@ -134,6 +139,8 @@ public class Rotate : MonoBehaviour
         SetRotateZ();
         TestShoot();
         Shake();
+        Shoot();
+        Reload();
     }
 
     IEnumerator CreateBullet()
