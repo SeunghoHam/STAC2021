@@ -66,13 +66,9 @@ public class Rotate : MonoBehaviour
         if (curShootDelay > maxShootDelay)
         {
             Debug.Log("Shoot");
-            GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
-            // Create position and Rotation is Local 
-            Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
-            Vector2 leftup = Vector2.up + Vector2.left;
-
-            //rigid.AddForce(new Vector2(-1,1) * bulletSpeed, ForceMode2D.Impulse);
-            rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
+            //GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
+            ObjectPool.GetObject();
+            
         }
 
 

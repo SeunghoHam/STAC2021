@@ -1462,7 +1462,7 @@ MonoBehaviour:
   ShootPoint: {fileID: 2024122569}
   camAnim: {fileID: 519420030}
   testImage: {fileID: 777718178}
-  maxShootDelay: 0.2
+  maxShootDelay: 0.4
   curShootDelay: 0.5
   AnlgeX: 0
   AngleY: 0
