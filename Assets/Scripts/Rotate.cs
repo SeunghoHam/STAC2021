@@ -9,8 +9,7 @@ public class Rotate : MonoBehaviour
     [SerializeField] private bool mouseDrag; // if Mouse Drag
     [SerializeField] private bool isButtonDown; // if Mouse Click
     [SerializeField] private bool isShootButtonDown;
-    [SerializeField] private float baseAngle = 0.0f;
-    [SerializeField] public int Direction = 0;
+    [SerializeField] private float baseAngle;
 
     [Header("Reference")]
     [SerializeField] private Transform angle3; // Triangle Object position
@@ -22,9 +21,14 @@ public class Rotate : MonoBehaviour
     [SerializeField] private float maxShootDelay = 3.0f;
     [SerializeField] private float curShootDelay = 0.2f;
 
+    [Header("Shoot Bullet Rotation")]
+    [SerializeField] private float AnlgeX;
+    [SerializeField] private float AngleY;
+
     [Header("Prefab")]
     [SerializeField] private GameObject prefabBullet; // Bullet GameObject
     [SerializeField] private GameObject A3;
+    [SerializeField] private GameObject A4;
 
 
 
@@ -59,13 +63,13 @@ public class Rotate : MonoBehaviour
         
 
         Debug.Log("Shoot");
-        GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance 
+        GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
         // Create position and Rotation is Local 
         Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
         Vector2 leftup = Vector2.up + Vector2.left;
         
         //rigid.AddForce(new Vector2(-1,1) * bulletSpeed, ForceMode2D.Impulse);
-        rigid.AddRelativeForce(new Vector2(-1,1) * bulletSpeed , ForceMode2D.Impulse);
+        rigid.AddRelativeForce(new Vector2(-1,0.8f) * bulletSpeed , ForceMode2D.Impulse);
         
 
         //curShootDelay = 0;

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    void Awake() 
+    ScoreManager theScoreMgr;
+    public void checkCollision()
     {
-        //http://devkorea.co.kr/bbs/board.php?bo_table=m03_qna&wr_id=76571
+        Debug.Log("Collision");
     }
-    void OnEnable() 
+    void Start()
     {
-        Rotate rotate = GetComponent<Rotate>();
-        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-        //rigid.AddRelativeForce(0,);
+        theScoreMgr = FindObjectOfType<ScoreManager>();    
     }
-    void Start() 
+    void Update() 
     {
-        
+        checkCollision();
     }
+
 }
