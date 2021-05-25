@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class kdCreateBullet : MonoBehaviour
 {
-
+    public GameObject m_goPrefab = null;
     IEnumerator CreateCoroutine()
     {
         while(true)

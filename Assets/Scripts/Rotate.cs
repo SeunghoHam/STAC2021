@@ -11,7 +11,8 @@ public class Rotate : MonoBehaviour
     [SerializeField] private bool isShootButtonDown;
     [SerializeField] private float baseAngle;
     [SerializeField] private bool AutoShoot;
-    [SerializeField] private bool GAB;
+
+
     [Header("Reference")]
     [SerializeField] private Transform angle3; // Triangle Object position
 
@@ -38,7 +39,7 @@ public class Rotate : MonoBehaviour
 
       private void Start()
     {
-        testImage.SetActive(false);
+        //testImage.SetActive(false);
         isButtonDown = false;
         mouseDrag = false;
         isShootButtonDown = false;
@@ -89,13 +90,18 @@ public class Rotate : MonoBehaviour
                 return;
             if (curShootDelay > maxShootDelay)
             {
-               //Debug.Log("Shoot");
-                GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
-                //ObjectPool.GetObject();
-
+               
+                //GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.
                 //Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
                 //rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
 
+
+                var bullet = ObjectPool.GetObject();
+                bullet.transform.position = this.transform.position;
+                bullet.transform.rotation  = this.transform.rotation;
+
+
+                //bullet.transform.position = transform.position.normalized; // 이거는 3d에서 사용될거 같은데
             }
             curShootDelay = 0;
         }
@@ -119,7 +125,7 @@ public class Rotate : MonoBehaviour
             {
                 // left top Angle Setting
                 this.transform.eulerAngles = new Vector3(0, 0, 0);
-                testImage.SetActive(true);
+                //testImage.SetActive(true);
 
             }
             else if (this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
