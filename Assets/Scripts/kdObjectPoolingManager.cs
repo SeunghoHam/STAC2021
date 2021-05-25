@@ -7,7 +7,7 @@ public class kdObjectPoolingManager : MonoBehaviour
     public static kdObjectPoolingManager instance;
     public GameObject m_goPrefab = null;
     public Queue<GameObject> m_queue = new Queue<GameObject>();
-    // Start is called before the first frame update
+    
     void Start()
     {
         instance = this;
@@ -31,10 +31,5 @@ public class kdObjectPoolingManager : MonoBehaviour
         GameObject t_object = m_queue.Dequeue();
         t_object.SetActive(true);
         return t_object;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

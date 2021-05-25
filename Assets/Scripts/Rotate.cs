@@ -10,7 +10,8 @@ public class Rotate : MonoBehaviour
     [SerializeField] private bool isButtonDown; // if Mouse Click
     [SerializeField] private bool isShootButtonDown;
     [SerializeField] private float baseAngle;
-
+    [SerializeField] private bool AutoShoot;
+    [SerializeField] private bool GAB;
     [Header("Reference")]
     [SerializeField] private Transform angle3; // Triangle Object position
 
@@ -18,8 +19,8 @@ public class Rotate : MonoBehaviour
     [SerializeField] Animator camAnim; // CameraAnimator
     [SerializeField] GameObject testImage;
 
-    [SerializeField] private float maxShootDelay = 0.2f;
-    [SerializeField] private float curShootDelay= 1f;
+    [SerializeField] private float maxShootDelay = 0.4f;
+    [SerializeField] private float curShootDelay = 0.5f;
 
     [Header("Shoot Bullet Rotation")]
     [SerializeField] private float AnlgeX;
@@ -34,6 +35,26 @@ public class Rotate : MonoBehaviour
 
 
     public float bulletSpeed = 5.0f;
+
+      private void Start()
+    {
+        testImage.SetActive(false);
+        isButtonDown = false;
+        mouseDrag = false;
+        isShootButtonDown = false;
+        AutoShoot = true;
+
+        kdCreateBullet kdPooling = FindObjectOfType<kdCreateBullet>();
+    }
+    private void Update()
+    {
+        //Debug.Log(transform.eulerAngles.z);
+        SetRotateZ();
+        Shake();
+        Shoot();
+        Reload();
+    }
+
     private void OnMouseDown()
     {
         isButtonDown = true;
@@ -54,40 +75,35 @@ public class Rotate : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    public void AutoShootButton()
+    {
+        AutoShoot = !AutoShoot;
+        Debug.Log(AutoShoot);
+    }
     public void Shoot() // 총알 발사
     {
-        //StartCoroutine(CreateBullet());
-        //BulletPoolingManager.GetObject();
-        //GameObject Bullets = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
-        //Bullets.GetComponent<Rigidbody2D>().AddForce(Bullets.transform.forward * bulletSpeed);
 
-        if(curShootDelay < maxShootDelay)
-            return;
-        if (curShootDelay > maxShootDelay)
+        if (AutoShoot)
         {
-            Debug.Log("Shoot");
-            //GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
-            ObjectPool.GetObject();
-            
+            if (curShootDelay < maxShootDelay)
+                return;
+            if (curShootDelay > maxShootDelay)
+            {
+               //Debug.Log("Shoot");
+                GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.  
+                //ObjectPool.GetObject();
+
+                //Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
+                //rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
+
+            }
+            curShootDelay = 0;
         }
 
-
-
-        curShootDelay = 0;
     }
     private void Reload()
     {
         curShootDelay += Time.deltaTime;
-    }
-
-    public void TestShoot()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //if(curShootDelay >  maxShootDelay)
-            Shoot();
-        }
-
     }
     void SetRotateZ() // 이런식으로 하면 될듯
     {
@@ -122,22 +138,7 @@ public class Rotate : MonoBehaviour
             camAnim.SetTrigger("shake");
         }
     }
-    private void Start()
-    {
-        testImage.SetActive(false);
-        isButtonDown = false;
-        mouseDrag = false;
-        isShootButtonDown = false;
-    }
-    private void Update()
-    {
-        //Debug.Log(transform.eulerAngles.z);
-        SetRotateZ();
-        TestShoot();
-        Shake();
-        Shoot();
-        Reload();
-    }
+  
 
     IEnumerator CreateBullet()
     {

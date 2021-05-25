@@ -10,19 +10,13 @@ public class kdCreateBullet : MonoBehaviour
         while(true)
         {
                 yield return null;
-                GameObject t_object  =kdObjectPoolingManager.instance.GetQueue();
+                GameObject t_object = kdObjectPoolingManager.instance.GetQueue();
                 t_object.transform.position=  Vector2.zero;
         }
     }
-    // Start is called before the first frame update
+    // Start is called before the first frame update    
     void Start()
     {
         StartCoroutine(CreateCoroutine());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -11,9 +11,8 @@ public class ObjectPool : MonoBehaviour
     private void Awkae()
     {
         Instance = this;
-        
     }
-    private void Initalize(int initCount)
+    private void Initalize(int initCount = 8)
     {
         for(int i=0; i <initCount; i++)
         {

@@ -4,33 +4,25 @@ using UnityEngine;
 
 public class kdBullet : MonoBehaviour
 {
-    Rigidbody2D m_myRigid= null;
+    [SerializeField] private float bulletSpeed = 2f;
+    Rigidbody2D rigid= null;
 
     private void OnEnable() 
     {
-        if(m_myRigid == null)
+        if(rigid == null)
         {
-            m_myRigid = GetComponent<Rigidbody2D>();
+            rigid = GetComponent<Rigidbody2D>();
         }    
-        m_myRigid.velocity = Vector2.zero; 
-        m_myRigid.AddForce(gameObject.transform.forward * 3f);
+        rigid.velocity = Vector2.zero; 
+        //m_myRigid.AddForce(gameObject.transform.forward * 3f);
+        rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
     }
 
     IEnumerator DestroyBullet()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         //Destroy(gameObject);
         kdObjectPoolingManager.instance.InsertQueue(gameObject);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
