@@ -91,14 +91,14 @@ public class Rotate : MonoBehaviour
             if (curShootDelay > maxShootDelay)
             {
                
-                //GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.
+                GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.
                 //Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
                 //rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
 
 
-                var bullet = ObjectPool.GetObject();
-                bullet.transform.position = this.transform.position;
-                bullet.transform.rotation  = this.transform.rotation;
+                //var bullet = ObjectPool.GetObject();
+                //bullet.transform.position = this.transform.position;
+                //bullet.transform.rotation  = this.transform.rotation;
 
 
                 //bullet.transform.position = transform.position.normalized; // 이거는 3d에서 사용될거 같은데

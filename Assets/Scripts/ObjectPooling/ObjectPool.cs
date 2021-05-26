@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour
     private Bullet CreateNewObject()
     {
         //var newObj = Instantiate(poolingObjectPrefab, transform).GetComponent<Bullet>();
-        var newObj = Instantiate(poolingObjectPrefab).GetComponent<Bullet>();
+        var newObj = Instantiate(poolingObjectPrefab, transform).GetComponent<Bullet>();
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform); // 이 구문 좀 고민됨
         return newObj;
