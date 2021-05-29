@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float enemyspeed = 1f;
+    private float enemyspeed = 0.5f;
 
     StatusManager theStatusMgr; 
     private void OnTriggerEnter2D(Collider2D other)

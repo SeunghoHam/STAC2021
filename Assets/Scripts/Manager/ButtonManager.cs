@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
+    public bool isPause = false;
+    
+    [Header("Buttons")]
+    [SerializeField] GameObject pause;
+    private void Start() 
+    {
+        pause.SetActive(false);
+    }
     public void pauseButton()
     {
         // 게임 정지시키고 일시정지 이미지
+        pause.SetActive(true);
     }
     public void continueButton()
     {

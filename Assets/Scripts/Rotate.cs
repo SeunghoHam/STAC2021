@@ -76,7 +76,6 @@ public class Rotate : MonoBehaviour
     public void AutoShootButton()
     {
         AutoShoot = !AutoShoot;
-        Debug.Log(AutoShoot);
     }
     public void Shoot() // 총알 발사
     {

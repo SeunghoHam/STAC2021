@@ -9,8 +9,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemySpawnPoint;
 
     [Header("SpawnTimeSetting")]
-    [SerializeField] private float maxSpawnDelay = 1f;
+    [SerializeField] private float maxSpawnDelay = 3f;
     [SerializeField] private float curSpawnDelay = 0.1f;
+
+    
     void Start()
     {
 
@@ -26,16 +28,38 @@ public class EnemySpawner : MonoBehaviour
             return;
         if (curSpawnDelay > maxSpawnDelay)
         {
-            //Debug.Log("EnemySpawn");
+                RandomSpawn();
             for(int i=0; i < enemySpawnPoint.Length; i++)
             {
-                GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[i].transform.position, enemySpawnPoint[i].transform.rotation);
-                
+                //GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[i].transform.position, enemySpawnPoint[i].transform.rotation);       
             }
            
         }
 
         curSpawnDelay = 0f;
+    }
+
+    private void RandomSpawn()
+    {
+        int m_random = Random.Range(0,2); 
+
+        if(m_random == 0)
+        {
+            Debug.Log("냥냥0");
+            GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[0].transform.position, enemySpawnPoint[0].transform.rotation);
+        }
+        else if(m_random == 1)
+        {
+            Debug.Log("냥냥1");
+            GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[1].transform.position, enemySpawnPoint[1].transform.rotation);
+        }
+        //else if(m_random == 2)
+        //{
+        //   Debug.Log("냥냥2");
+        //    GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[2].transform.position, enemySpawnPoint[2].transform.rotation);
+        //}
+
+              
     }
     void SpawnDelay()
     {
