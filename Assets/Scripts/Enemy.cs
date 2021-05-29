@@ -11,13 +11,13 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Bullet")
         {
-            Debug.Log(" Enemy & Bullet");
+            //Debug.Log(" Enemy & Bullet");
             StartCoroutine(Destroy());
             
         }
         if(other.tag == "Player")
         {
-            Debug.Log(" Enemy & Player");
+            //Debug.Log(" Enemy & Player");
         }
     }
     IEnumerator Destroy()
@@ -28,6 +28,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-        rigid.AddRelativeForce(new Vector2(1f, -0.8f) * enemyspeed, ForceMode2D.Impulse);
+        rigid.AddRelativeForce(new Vector2(0,1) * enemyspeed, ForceMode2D.Impulse);
     }
 }

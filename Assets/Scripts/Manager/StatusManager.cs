@@ -44,7 +44,7 @@ public class StatusManager : MonoBehaviour
     }
     private void PlayerDead()
     {
-        Debug.Log("player is dead");
+        //Debug.Log("player is dead");
     }
     void Start()
     {

@@ -10,15 +10,15 @@ public class Rotate : MonoBehaviour
     [SerializeField] private bool isButtonDown; // if Mouse Click
     [SerializeField] private bool isShootButtonDown;
     [SerializeField] private float baseAngle;
-    [SerializeField] private bool AutoShoot;
-
+    [SerializeField] private bool AutoShoot; // 자동 쏘기 버튼
+    [SerializeField] private bool ShootCharge; // 이게 참이어야 슛 게이지가 오름
+    [SerializeField] private GameObject testImage;
 
     [Header("Reference")]
     [SerializeField] private Transform angle3; // Triangle Object position
 
     [SerializeField] private Transform ShootPoint; // ShootPoint = RotatingObject
     [SerializeField] Animator camAnim; // CameraAnimator
-    [SerializeField] GameObject testImage;
 
     [SerializeField] private float maxShootDelay = 0.4f;
     [SerializeField] private float curShootDelay = 0.5f;
@@ -32,28 +32,25 @@ public class Rotate : MonoBehaviour
     [SerializeField] private GameObject A3;
     [SerializeField] private GameObject A4;
 
-
-
-
     public float bulletSpeed = 5.0f;
 
       private void Start()
     {
-        //testImage.SetActive(false);
+        testImage.SetActive(false);
         isButtonDown = false;
         mouseDrag = false;
         isShootButtonDown = false;
         AutoShoot = true;
+        ShootCharge = true;
 
-        kdCreateBullet kdPooling = FindObjectOfType<kdCreateBullet>();
     }
     private void Update()
     {
-        //Debug.Log(transform.eulerAngles.z);
         SetRotateZ();
         Shake();
-        Shoot();
+        //Shoot();
         Reload();
+        AttackTimer();
     }
 
     private void OnMouseDown()
@@ -109,7 +106,8 @@ public class Rotate : MonoBehaviour
     }
     private void Reload()
     {
-        curShootDelay += Time.deltaTime;
+        if(ShootCharge)
+            curShootDelay += Time.deltaTime;
     }
     void SetRotateZ() // 이런식으로 하면 될듯
     {
@@ -125,7 +123,6 @@ public class Rotate : MonoBehaviour
             {
                 // left top Angle Setting
                 this.transform.eulerAngles = new Vector3(0, 0, 0);
-                //testImage.SetActive(true);
 
             }
             else if (this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
@@ -134,6 +131,22 @@ public class Rotate : MonoBehaviour
             }
         }
     }
+
+    private void AttackTimer()
+    {
+        if(isButtonDown && mouseDrag)
+        {
+            testImage.SetActive(true);
+            ShootCharge = false;
+
+        }
+        if(!isButtonDown && !mouseDrag) // if not Clicking 이 불타입을 함수로 만드는 방버 생각해봐야 될듯 
+        {
+            testImage.SetActive(false);
+            ShootCharge = true;
+        }
+    }
+
 
     private void Shake()
     {
@@ -151,9 +164,7 @@ public class Rotate : MonoBehaviour
         while (true)
         {
             yield return null;
-            //Instantiate(Bullet, Vector2.zero, Quaternion.identity);
-            //GameObject t_object = BulletPoolingManager.instance.GetQueue();
-            //t_object.transform.position = Vector2.zero;
+
         }
     }
 }
