@@ -21,7 +21,7 @@ public class ButtonManager : MonoBehaviour
     {
         // 화면 전체가 크게 버튼. 진행 중인 게임 이어서
     }
-    public void startButton()
+    public void _startButton()
     {
         // 타이틀 - > 메인. 씬 전환
     }

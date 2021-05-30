@@ -9,7 +9,9 @@ public class StatusManager : MonoBehaviour
     [SerializeField] private int maxHP;
     [SerializeField] private int currentHP;
     
-
+    [SerializeField] GameObject HitImage1;
+    [SerializeField] GameObject HitImage2;
+    [SerializeField] GameObject RetryImage;
     void UpdateHpStatus()
     {
         for(int i=0; i < go_hpArray.Length; i++)
@@ -44,7 +46,7 @@ public class StatusManager : MonoBehaviour
     }
     private void PlayerDead()
     {
-        //Debug.Log("player is dead");
+        Debug.Log("player is dead");
     }
     void Start()
     {

@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore += _num;
     }
+
     void Start()
     {
          
