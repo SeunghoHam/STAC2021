@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
 
     StatusManager theStatusMgr;
     ScoreManager theScoreMgr;
-
+    private float time =0;
+    private float _fadeTime =1f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,7 +29,10 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator Destroy()
     {
-        this.gameObject.SetActive(false);
+
+        //GetComponent<SpriteRenderer>().color = new Color(1,1,1,1f - time/_fadeTime);
+       Destroy(gameObject);
+
         yield return null;
     }
     void Start()
@@ -39,4 +43,10 @@ public class Enemy : MonoBehaviour
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.AddRelativeForce(new Vector2(0,1) * enemyspeed, ForceMode2D.Impulse);
     }
+    void Update() 
+    {
+       
+        time += Time.deltaTime;
+    }
+    
 }
