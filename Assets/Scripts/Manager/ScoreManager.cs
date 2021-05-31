@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private Text text_Score;
     [SerializeField] Animator anim_Score;
-    [SerializeField] private int currentScore;
+    [SerializeField] private int currentScore = 0;
 
     
     public void IncreaseScore(int _num)
@@ -15,14 +15,11 @@ public class ScoreManager : MonoBehaviour
         currentScore += _num;
     }
 
-    void Start()
-    {
-         
-    }
-
-    
     void Update()
     {
-        
+        text_Score.text = currentScore.ToString(format:"0##");
+
+        if(Input.GetKeyDown(KeyCode.F))
+        IncreaseScore(20);
     }
 }

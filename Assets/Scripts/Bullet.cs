@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-        rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
+        rigid.AddRelativeForce(new Vector2(-1f,0.5f) * bulletSpeed, ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,6 +23,6 @@ public class Bullet : MonoBehaviour
     private void DestroyBullet()
     {
         //ObjectPool.ReturnObject(this);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject);
     }
 }

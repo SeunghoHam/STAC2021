@@ -20,7 +20,7 @@ public class Rotate : MonoBehaviour
     [SerializeField] private Transform ShootPoint; // ShootPoint = RotatingObject
     [SerializeField] Animator camAnim; // CameraAnimator
 
-    [SerializeField] private float maxShootDelay = 0.4f;
+    [SerializeField] private float maxShootDelay = 1f;
     [SerializeField] private float curShootDelay = 0.5f;
 
     [Header("Shoot Bullet Rotation")]
@@ -31,8 +31,6 @@ public class Rotate : MonoBehaviour
     [SerializeField] private GameObject prefabBullet; // Bullet GameObject
     [SerializeField] private GameObject A3;
     [SerializeField] private GameObject A4;
-
-    public float bulletSpeed = 5.0f;
 
       private void Start()
     {
@@ -48,7 +46,7 @@ public class Rotate : MonoBehaviour
     {
         SetRotateZ();
         Shake();
-        //Shoot();
+        Shoot();
         Reload();
         AttackTimer();
     }
