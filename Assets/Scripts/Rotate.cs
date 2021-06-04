@@ -106,7 +106,7 @@ public class Rotate : MonoBehaviour
         if(ShootCharge)
             curShootDelay += Time.deltaTime;
     }
-    void SetRotateZ() // 이런식으로 하면 될듯
+    void SetRotateZ()
     {
         if (isButtonDown && mouseDrag) // if Clicking
         {
@@ -116,15 +116,21 @@ public class Rotate : MonoBehaviour
         if (!isButtonDown && !mouseDrag) // if not Clicking
         {
 
-            if (this.transform.eulerAngles.z < 50f && this.transform.eulerAngles.z < 291f)
+            if (this.transform.eulerAngles.z < 57f || this.transform.eulerAngles.z > 300f)
             {
                 // left top Angle Setting
                 this.transform.eulerAngles = new Vector3(0, 0, 0);
 
             }
-            else if (this.transform.eulerAngles.z < 159f && this.transform.eulerAngles.z > 51f)
+            else if (this.transform.eulerAngles.z < 180f && this.transform.eulerAngles.z > 58f)
             {
+                // bottom Angle Setting
                 this.transform.eulerAngles = new Vector3(0, 0, 120);
+            }
+            else if(this.transform.eulerAngles.z > 181f && this.transform.eulerAngles.z < 299f )
+            {
+                // right top Angle Setting
+                this.transform.eulerAngles = new Vector3(0,0,240);
             }
         }
     }
@@ -147,7 +153,7 @@ public class Rotate : MonoBehaviour
 
     private void Shake()
     {
-        if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown && !isShootButtonDown)
+        if (Input.GetMouseButtonUp(0) && mouseDrag && isButtonDown && !isShootButtonDown) // 드래그 시키고 마우스 버튼 땔때 카메라 흔들리는 효과
         {
             isButtonDown = false;
             mouseDrag = false;
@@ -163,5 +169,10 @@ public class Rotate : MonoBehaviour
             yield return null;
 
         }
+    }
+    IEnumerator TurnEffectCoroutine()
+    {
+        Debug.Log("turneffect");
+        yield return null;
     }
 }

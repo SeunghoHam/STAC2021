@@ -45,12 +45,10 @@ public class EnemySpawner : MonoBehaviour
 
         if(m_random == 0)
         {
-            Debug.Log("냥냥0");
             GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[0].transform.position, enemySpawnPoint[0].transform.rotation);
         }
         else if(m_random == 1)
         {
-            Debug.Log("냥냥1");
             GameObject Enemy = Instantiate(prefabEnemy, enemySpawnPoint[1].transform.position, enemySpawnPoint[1].transform.rotation);
         }
         //else if(m_random == 2)

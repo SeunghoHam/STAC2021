@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.AddRelativeForce(new Vector2(-1f,0.5f) * bulletSpeed, ForceMode2D.Impulse);
+        transform.Rotate(0,0,60f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

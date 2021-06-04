@@ -13,8 +13,7 @@ public class Player : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
-            //theStatusMgr.DecreaseHP(1);
-            Debug.Log("test");
+            theStatusMgr.DecreaseHP(1);
 
         }
     }
