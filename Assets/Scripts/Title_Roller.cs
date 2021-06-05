@@ -8,15 +8,15 @@ public class Title_Roller : MonoBehaviour
     [SerializeField] GameObject Roller_L;
     [SerializeField] GameObject Roller_B;
 
-    private float rollingSpeed1 = .6f;
-    private float rollingSpeed2 = .8f;
-    private float rollingSpeed3 = .5f;
+    private float rollingSpeed1 = 6f;
+    private float rollingSpeed2 = 8f;
+    private float rollingSpeed3 = 5f;
 
     // Update is called once per frame
     void Update()
     {
-        Roller_T.transform.Rotate(0,0,rollingSpeed1);
-        Roller_L.transform.Rotate(0,0,-rollingSpeed2);
-        Roller_B.transform.Rotate(0,0,-rollingSpeed3);
+        Roller_T.transform.Rotate(0,0,rollingSpeed1*Time.deltaTime);
+        Roller_L.transform.Rotate(0,0,-rollingSpeed2*Time.deltaTime);
+        Roller_B.transform.Rotate(0,0,-rollingSpeed3*Time.deltaTime);
     }
 }
