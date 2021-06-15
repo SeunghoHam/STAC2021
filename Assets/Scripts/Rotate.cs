@@ -32,6 +32,9 @@ public class Rotate : MonoBehaviour
     [SerializeField] private GameObject A3;
     [SerializeField] private GameObject A4;
 
+    [Header("Effect")]
+    [SerializeField] private ParticleSystem shootParticle;
+
       private void Start()
     {
         testImage.SetActive(false);
@@ -158,6 +161,8 @@ public class Rotate : MonoBehaviour
             isButtonDown = false;
             mouseDrag = false;
             camAnim.SetTrigger("shake");
+            shootParticle.Play();
+            //StartCoroutine(cameraShake.Shake(.15f, .4f));
         }
     }
   

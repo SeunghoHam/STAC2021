@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private float enemyspeed = 0.5f;
 
+    [SerializeField] public ParticleSystem collisionParticle;
     StatusManager theStatusMgr;
     ScoreManager theScoreMgr;
     private float time =0;
