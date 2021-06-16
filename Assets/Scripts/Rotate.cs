@@ -161,7 +161,7 @@ public class Rotate : MonoBehaviour
             isButtonDown = false;
             mouseDrag = false;
             camAnim.SetTrigger("shake");
-            shootParticle.Play();
+            // shootParticle.Play();
             //StartCoroutine(cameraShake.Shake(.15f, .4f));
         }
     }

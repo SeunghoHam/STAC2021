@@ -17,13 +17,18 @@ public class Bullet : MonoBehaviour
         if(other.tag == "Enemy")
         {
             //this.gameObject.SetActive(false);
-            DestroyBullet();
+            StartCoroutine(DestoryBullet());
+        }
+        else if(other.tag == "Item_Score")
+        {
+            StartCoroutine(DestoryBullet());
         }
     }
 
-    private void DestroyBullet()
+
+    IEnumerator DestoryBullet()
     {
-        //ObjectPool.ReturnObject(this);
         Destroy(gameObject);
+        yield return null;
     }
 }

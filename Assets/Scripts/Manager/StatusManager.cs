@@ -13,11 +13,11 @@ public class StatusManager : MonoBehaviour
     [SerializeField] GameObject HitImage2;
     [SerializeField] GameObject RetryImage;
 
-    Hit_Image hitImage;
+    Hit_Image thehitImage;
 
     void Start()
     {
-        hitImage = FindObjectOfType<Hit_Image>();
+        thehitImage = FindObjectOfType<Hit_Image>();
         
         currentHP = maxHP;
         UpdateHpStatus();
@@ -48,7 +48,11 @@ public class StatusManager : MonoBehaviour
     {
         if(currentHP == 2)
         {
-            
+            thehitImage.Hit1();
+        }
+        if(currentHP == 1)
+        {
+            thehitImage.Hit2();
         }
     }
     public void DecreaseHP(int _num)

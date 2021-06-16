@@ -1142,8 +1142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4739d032f6cb1b148b385a740c16666d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitImage1: {fileID: 0}
-  hitImage2: {fileID: 0}
+  hitImage1: {fileID: 673960595}
+  hitImage2: {fileID: 1612872677}
 --- !u!1 &565452303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &673960596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2076,7 +2076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 240}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -473, y: 173.5}
+  m_AnchoredPosition: {x: -473, y: 115}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1202921750
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   prefabBullet: {fileID: 8091775428327898575, guid: 231c971a3d838b74f9b959d7fbee1a71, type: 3}
   A3: {fileID: 1867585106}
   A4: {fileID: 0}
-  shootParticle: {fileID: 1848384591}
+  shootParticle: {fileID: 0}
 --- !u!4 &1314815343
 Transform:
   m_ObjectHideFlags: 0
@@ -2659,7 +2659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1612872678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8066,7 +8066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2020935611
 RectTransform:
   m_ObjectHideFlags: 0
