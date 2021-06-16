@@ -39,14 +39,13 @@ public class StatusManager : MonoBehaviour
         if(currentHP > maxHP)
         {
             currentHP = maxHP;
-            Debug.Log("Get Bonus Score");
         }
      
         UpdateHpStatus();
     }
     private void PlayerDead()
     {
-        Debug.Log("player is dead");
+        
     }
     void Start()
     {
