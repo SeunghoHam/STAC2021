@@ -5,16 +5,32 @@ using UnityEngine.UI;
 
 public class Hit_Image : MonoBehaviour
 {
-    [SerializeField] 
-    // Start is called before the first frame update
+    [SerializeField] GameObject hitImage1;
+    [SerializeField] GameObject hitImage2;
     void Start()
     {
-        
+        hitImage1.SetActive(false);
+        hitImage2.SetActive(false);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            hitImage1.SetActive(true);
+        }
+
+    }
+
+
+    public void Hit1()
+    {
+        hitImage1.SetActive(true);
+        hitImage2.SetActive(false);
+    }
+    public void Hit2()
+    {
+        hitImage2.SetActive(false);
+        hitImage2.SetActive(true);
     }
 }

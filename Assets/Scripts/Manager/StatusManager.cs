@@ -12,6 +12,28 @@ public class StatusManager : MonoBehaviour
     [SerializeField] GameObject HitImage1;
     [SerializeField] GameObject HitImage2;
     [SerializeField] GameObject RetryImage;
+
+    Hit_Image hitImage;
+
+    void Start()
+    {
+        hitImage = FindObjectOfType<Hit_Image>();
+        
+        currentHP = maxHP;
+        UpdateHpStatus();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            IncreaseHP(1);
+        }   
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            DecreaseHP(1);
+        }
+    }
     void UpdateHpStatus()
     {
         for(int i=0; i < go_hpArray.Length; i++)
@@ -20,6 +42,13 @@ public class StatusManager : MonoBehaviour
                 go_hpArray[i].SetActive(true);
             else
             go_hpArray[i].SetActive(false);
+        }
+    }
+    public void CheckHp()
+    {
+        if(currentHP == 2)
+        {
+            
         }
     }
     public void DecreaseHP(int _num)
@@ -47,21 +76,5 @@ public class StatusManager : MonoBehaviour
     {
         
     }
-    void Start()
-    {
-        currentHP = maxHP;
-        UpdateHpStatus();
-    }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            IncreaseHP(1);
-        }   
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            DecreaseHP(1);
-        }
-    }
 }
