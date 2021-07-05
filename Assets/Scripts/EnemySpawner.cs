@@ -17,15 +17,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float maxSpawnDelay = 1.5f;
     [SerializeField] private float curSpawnDelay = 0f;
 
+
+    Pause pause;
     
     void Start()
     {
-
+        pause = FindObjectOfType<Pause>();
     }
     void Update()
     {
-        Spawn();
-        SpawnDelay();
+
+            Spawn();
+            SpawnDelay();
+
     }
     private void Spawn()
     {

@@ -35,8 +35,11 @@ public class Rotate : MonoBehaviour
     [Header("Effect")]
     [SerializeField] private ParticleSystem shootParticle;
 
-      private void Start()
+    Pause pause;
+
+    private void Start()
     {
+        pause = FindObjectOfType<Pause>();
         testImage.SetActive(false);
         isButtonDown = false;
         mouseDrag = false;
@@ -47,11 +50,14 @@ public class Rotate : MonoBehaviour
     }
     private void Update()
     {
-        SetRotateZ();
-        Shake();
-        Shoot();
-        Reload();
-        AttackTimer();
+
+            SetRotateZ();
+            Shake();
+            Shoot();
+            Reload();
+            AttackTimer();
+
+
     }
 
     private void OnMouseDown()
@@ -87,7 +93,7 @@ public class Rotate : MonoBehaviour
                 return;
             if (curShootDelay > maxShootDelay)
             {
-               
+
                 GameObject Bullet = Instantiate(prefabBullet, this.transform.position, this.transform.rotation); // Bullet Instance.
                 //Rigidbody2D rigid = Bullet.GetComponent<Rigidbody2D>();
                 //rigid.AddRelativeForce(new Vector2(-1, 0.8f) * bulletSpeed, ForceMode2D.Impulse);
@@ -106,7 +112,7 @@ public class Rotate : MonoBehaviour
     }
     private void Reload()
     {
-        if(ShootCharge)
+        if (ShootCharge)
             curShootDelay += Time.deltaTime;
     }
     void SetRotateZ()
@@ -130,23 +136,23 @@ public class Rotate : MonoBehaviour
                 // bottom Angle Setting
                 this.transform.eulerAngles = new Vector3(0, 0, 120);
             }
-            else if(this.transform.eulerAngles.z > 181f && this.transform.eulerAngles.z < 299f )
+            else if (this.transform.eulerAngles.z > 181f && this.transform.eulerAngles.z < 299f)
             {
                 // right top Angle Setting
-                this.transform.eulerAngles = new Vector3(0,0,240);
+                this.transform.eulerAngles = new Vector3(0, 0, 240);
             }
         }
     }
 
     private void AttackTimer()
     {
-        if(isButtonDown && mouseDrag)
+        if (isButtonDown && mouseDrag)
         {
             testImage.SetActive(true);
             ShootCharge = false;
 
         }
-        if(!isButtonDown && !mouseDrag) // if not Clicking 이 불타입을 함수로 만드는 방버 생각해봐야 될듯 
+        if (!isButtonDown && !mouseDrag) // if not Clicking 이 불타입을 함수로 만드는 방버 생각해봐야 될듯 
         {
             testImage.SetActive(false);
             ShootCharge = true;
@@ -165,7 +171,7 @@ public class Rotate : MonoBehaviour
             //StartCoroutine(cameraShake.Shake(.15f, .4f));
         }
     }
-  
+
 
     IEnumerator CreateBullet()
     {

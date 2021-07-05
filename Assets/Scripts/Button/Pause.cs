@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
-    public static Pause Instance;
-    [SerializeField] private bool isPause;
+    public bool isPause;
     [SerializeField] private GameObject g_Pause;
+    [SerializeField] private GameObject g_Continue;
+    [SerializeField] private GameObject g_Exit;
     void Awake()
-    {
-        Instance = this;    
+    {   
     }
     void Start()
     {
@@ -24,9 +24,19 @@ public class Pause : MonoBehaviour
         {
             g_Pause.SetActive(true);
         }
+        if(!isPause)
+        {
+            g_Pause.SetActive(false);
+        }
     }
     public void PauseButton()
     {
-        isPause = !isPause;
+        Time.timeScale =0;
+        isPause = true;
+    }
+    public void ContinueButton()
+    {
+        Time.timeScale = 1;
+        isPause = false;
     }
 }

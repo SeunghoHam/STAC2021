@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class StatusManager : MonoBehaviour
 {
@@ -61,7 +61,6 @@ public class StatusManager : MonoBehaviour
         UpdateHpStatus();
         if(currentHP <= 0)
             PlayerDead();
-
     }
     public void IncreaseHP(int _num)
     {

@@ -18,11 +18,13 @@ public class Item_BonusScore : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {   
-        if(other.tag == "Player" ) 
+        if(other.tag == "Player") 
         {
+            theScoreMgr.IncreaseScore(10);
             StartCoroutine(Destroy());
         }
-        else if(other.tag == "Bullet")
+
+        if(other.tag == "Bullet")
         {
             StartCoroutine(Destroy());
         }

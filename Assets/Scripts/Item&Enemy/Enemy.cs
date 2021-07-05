@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private float enemySpeed = 1f;
 
-    [SerializeField] public ParticleSystem collisionParticle;
+    //[SerializeField] public ParticleSystem collisionParticle;
     StatusManager theStatusMgr;
     ScoreManager theScoreMgr;
     private float time =0;
@@ -20,14 +20,15 @@ public class Enemy : MonoBehaviour
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.AddRelativeForce(new Vector2(0,1) * enemySpeed, ForceMode2D.Impulse);
     }
-    private void OntriggerEnter2D(Collider2D other) 
+    public void OntriggerEnter2D(Collider2D other) 
     {
         if(other.tag == "Bullet")
         {
             theScoreMgr.IncreaseScore(1);
             StartCoroutine(Destroy());
         }    
-        else if(other.tag == "Player")
+        
+        if(other.tag == "Player")
         { 
             theStatusMgr.DecreaseHP(1);
             StartCoroutine(Destroy());

@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - ItemScore
   - Enemy
-  - Item_Score
   layers:
   - Default
   - TransparentFX

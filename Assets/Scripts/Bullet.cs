@@ -14,15 +14,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
-        {
-            //this.gameObject.SetActive(false);
-            StartCoroutine(DestoryBullet());
-        }
-        else if(other.tag == "Item_Score")
+        if(other.tag == "Enemy" || other.tag == "ItemScore")
         {
             StartCoroutine(DestoryBullet());
         }
+
+
     }
 
 
