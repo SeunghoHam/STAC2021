@@ -17,12 +17,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float maxSpawnDelay = 1.5f;
     [SerializeField] private float curSpawnDelay = 0f;
 
-
-    Pause pause;
-    
     void Start()
     {
-        pause = FindObjectOfType<Pause>();
+
     }
     void Update()
     {
@@ -46,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
     {
         int m_spawnpoint_Random = Random.Range(0,3); // Random.Range : Left = Include , Right = Exclusive
         int m_object_Random = Random.Range(0,2);
-        Debug.Log(m_spawnpoint_Random);
+        //Debug.Log(m_spawnpoint_Random);
 
         if(m_spawnpoint_Random == 0) // SpawnpointArray_Buttom Spawn
         {

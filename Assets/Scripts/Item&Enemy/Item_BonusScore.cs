@@ -24,7 +24,7 @@ public class Item_BonusScore : MonoBehaviour
             StartCoroutine(Destroy());
         }
 
-        if(other.tag == "Bullet")
+        if(other.tag == "BUllet")
         {
             StartCoroutine(Destroy());
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -34,9 +35,15 @@ public class Pause : MonoBehaviour
         Time.timeScale =0;
         isPause = true;
     }
-    public void ContinueButton()
+    public void Button_Continue()
     {
         Time.timeScale = 1;
         isPause = false;
+    }
+
+    public void Button_Back()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main");
     }
 }

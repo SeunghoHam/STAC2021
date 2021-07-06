@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy" || other.tag == "ItemScore")
         {
+            //Debug.Log("BulletCollision");
             StartCoroutine(DestoryBullet());
         }
 
